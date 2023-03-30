@@ -36,6 +36,49 @@
             ]
       )))
 
+;Pruebas
 ;(invert '((3 2) (4 2) (1 5) (2 8)) even?)
 ;(invert '((5 9) (10 90) (82 7)) multiplo5?)
 ;(invert '((6 9) (10 90) (82 7)) odd?)
+
+;Punto 7
+;funcion-append:
+;Proposito:Procedimiento que concatena 2 listas.
+;L x L -> L’:
+;<lista> := ()
+;:=<Valor><lista>
+;<Valor> := string|int
+(define append
+  (lambda (l1 l2)
+    (cond
+      [ (null? l1) l2]
+      [else (  cons (car l1) (append (cdr l1) l2) )])))
+
+;cartesian-product:
+;Proposito:Procedimiento que concatena el primer elemento de la lista llamado x con cada uno de los elementos de lista
+;X x L -> L’ :
+; <lista> := ()
+; :=<Valor><lista>
+; <Valor> := string|int
+(define cartesian-product-aux
+  (lambda (x L)
+    (cond
+      [(null? L) L  ]
+      [else ( cons (list x (car L)) (cartesian-product-aux x (cdr L)))])))
+
+;cartesian-product :
+;Proposito:Procedimiento que invoca a la función auxiliar,teniendo como argumentos el primero de la l1 y la lista l2, donde hace el mismo proceso para los demas elementos de l1.
+;L x L -> L’:
+;<lista> := ()
+; :=<Valor><lista>
+; <Valor> := string|int
+ (define cartesian-product
+   (lambda (l1 l2)
+     (cond
+       [(or ( null? l1) ( null? l2)) empty]
+       [else ( append (cartesian-product-aux (car l1)l2) (cartesian-product (cdr l1)l2) ) ])))
+
+;Pruebas
+;(cartesian-product '(a b c) ’(x y))
+;(cartesian-product '(p q r) '(5 6 7))
+;(cartesian-product '(ba) '(tir lada lazo ño nco rco))
