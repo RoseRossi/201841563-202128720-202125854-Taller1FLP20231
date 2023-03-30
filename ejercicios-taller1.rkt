@@ -472,30 +472,10 @@
   (lambda (mat vec)
     (if (null? mat); si la matriz es vacia devuelve una matriz vacia
         empty
-        (cons (cons (*(caar mat) (car vec)) (cons (*(cadar mat) (cadr vec))  empty));multiplica la primera fila de la matriz por el vector y la agrega a la matriz resultante
-              (prod-scalar-matriz (cdr mat) vec));llamada a la funcion para multiplicar el resto de las filas de la matriz por el vector y agregarlas a la matriz resultante
+        (cons (cons (*(caar mat) (car vec)) (cons (*(cadar mat) (cadr vec))  empty)) ;multiplica la primera fila de la matriz por el vector y la agrega a la matriz resultante
+              (prod-scalar-matriz (cdr mat) vec)) ;llamada a la funcion para multiplicar el resto de las filas de la matriz por el vector y agregarlas a la matriz resultante
         )))
 ;Pruebas punto 17
 (prod-scalar-matriz '((1 1) (2 2)) '(2 3))
 (prod-scalar-matriz '((1 1) (2 2) (3 3)) '(2 3))
-
-
-
-;punto 17
-
-;prod-scalar-matriz 
-;Mat x Vec-> Int:realiza la multiplicacion de matriz por vector y retorna el resultado de dicha operación
-;<Mat>::= '()
-;     ::= ((<int> <int>) <Mat>)
-;<Vec>::= ((<int> <int>))
-
-(define prod-scalar-matriz
-  (lambda (Mat Vec)
-    (if (null? Mat)
-        empty
-        (cons (cons (*(car Mat) (car Vec))  (cons (*(cdr Mat) (cadr Vec))  empty)) (prod-scalar-matriz (cdr Mat) Vec))
-        )))
-;Pruebas
-;(prod-scalar-matriz '((1 1) (2 2) (3 3)) '(2 3))
-;(prod-scalar-matriz '((1 1) (2 2)) '(2 3))
-;(prod-scalar-matriz '((1 1) (2 2) (3 3)) '(3 2))
+(prod-scalar-matriz '((1 1) (2 2) (3 3) (4 4)) '(3 4))
