@@ -82,3 +82,23 @@
 ;(cartesian-product '(a b c) ’(x y))
 ;(cartesian-product '(p q r) '(5 6 7))
 ;(cartesian-product '(ba) '(tir lada lazo ño nco rco))
+
+;Punto 12
+
+;filter-acum: a x b x F x acum x filter -> <Int>
+;propósito: retorna un acumulador como el resultado de aplicar una operación binaria entre números de un intervalo dado si cumplen un predicado
+;<a> :: = <Int>
+;<b> :: = <Int>
+;<F> :: = +| - | *| /
+;<acum> :: = <Int>
+;<filter> :: = <datatype?>
+
+(define filter-acum
+  (lambda(a b F acum filter)
+    (if (or(< a b)(eqv? a b))
+        (if(filter a)
+	  (F a(filter-acum (+ a 1) b F (+ acum a) filter))
+          (filter-acum (+ a 1) b F acum filter)) 0)))
+;Pruebas
+;(filter-acum 1 10 + 0 even?)
+;(filter-acum 1 10 + 0 odd?)
