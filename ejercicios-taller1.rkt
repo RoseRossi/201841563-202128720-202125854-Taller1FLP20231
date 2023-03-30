@@ -104,6 +104,7 @@
 ;(filter-acum 1 10 + 0 odd?)
 
 ;Punto 14
+
 ;path
 ;Proposito:  
 ;n x BST -> <Lista>: Procedimiento que devuelve el camino que se debe recorrer en un arbol binario de busqueda para llegar a un numero(n)
