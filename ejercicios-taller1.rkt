@@ -102,3 +102,81 @@
 ;Pruebas
 ;(filter-acum 1 10 + 0 even?)
 ;(filter-acum 1 10 + 0 odd?)
+
+;Punto 14
+;path
+;Proposito:  
+;n x BST -> <Lista>: Procedimiento que devuelve el camino que se debe recorrer en un arbol binario de busqueda para llegar a un numero(n)
+;<n> ::= Int
+;<BST> ::= <arbol-binario>
+;<arbol-binario> ::= (arbol-vacío) empty
+;                ::= (nodo) numero <árbol-binario> <árbol-binario>
+(define path
+  (lambda (n BST)
+    (cond
+      [(eqv? (car BST) n) '()]
+      [(< (car BST) n)(cons 'right (path n (caddr BST)))]
+      [(> (car BST) n)(cons 'left (path n (cadr BST)))]
+      )
+    )
+  )
+;Pruebas
+;(path 17 '(14 (7 () (12 () ()))(26 (20 (17 () ())())(31 () ()))))
+;(path 10 '(8 (3 (1 () ()) (6 (4 () ()) (7 () ()))) (10 () (14 (13 () ()) ()))))
+
+;Punto 15
+
+;count-ood (aux count-odd-and-even): L -> Int
+;Proposito: cuenta la cantidad de números impares en una lista l.
+;<L> :== '()
+;    :== <int> <L>
+(define count-odd
+  (lambda (lista)
+    (cond [(null? lista) 0]
+          [(and (number? (car lista)) (odd? (car lista))) (+ 1 (count-odd (cdr lista)))]
+          [(or (list? (car lista)) (pair? (car lista))) (+ (count-odd (car lista)) (count-odd (cdr lista)))]
+          [else (count-odd (cdr lista))]
+          )))
+
+;count-even (aux count-odd-and-even): L -> Int
+;Proposito: Procedimiento que cuenta la cantidad de números pares en una lista L.
+;<L> :== '()
+;    :== <int> <L>
+(define count-even
+  (lambda (lista)
+    (cond [(null? lista) 0]
+          [(and (number? (car lista)) (even? (car lista))) (+ 1 (count-even (cdr lista)))]
+          [(or (list? (car lista)) (pair? (car lista))) (+ (count-even (car lista)) (count-even (cdr lista)))]
+          [else (count-even (cdr lista))]
+          )))
+
+;count-odd-and-even : lista -> 'lista
+;Proposito: Procedimiento que cuenta la cantidad de números pares e impares de una lista L, y pone sus contadores en una lista.
+;<L> :== '()
+;    :== <int> <L>
+(define count-odd-and-even
+  (lambda (lista)
+    (cons (count-even lista) (cons (count-odd lista) empty))
+    ))
+;Pruebas
+;(count-odd-and-even '(14 (7 () (12 () ()))(26 (20 (17 () ())())(31 () ()))))
+;(count-odd-and-even '(6 (12 40 50) 13)
+
+;punto 17
+
+;prod-scalar-matriz 
+;Mat x Vec-> Int:realiza la multiplicacion de matriz por vector y retorna el resultado de dicha operación
+;<Mat>::= '()
+;     ::= ((<int> <int>) <Mat>)
+;<Vec>::= ((<int> <int>))
+
+(define prod-scalar-matriz
+  (lambda (Mat Vec)
+    (if (null? Mat)
+        empty
+        (cons (cons (*(car Mat) (car Vec))  (cons (*(cdr Mat) (cadr Vec))  empty)) (prod-scalar-matriz (cdr Mat) Vec))
+        )))
+;Pruebas
+;(prod-scalar-matriz '((1 1) (2 2) (3 3)) '(2 3))
+;(prod-scalar-matriz '((1 1) (2 2)) '(2 3))
+;(prod-scalar-matriz '((1 1) (2 2) (3 3)) '(3 2))
