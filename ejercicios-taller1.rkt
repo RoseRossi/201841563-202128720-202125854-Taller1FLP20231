@@ -479,3 +479,39 @@
 (prod-scalar-matriz '((1 1) (2 2)) '(2 3))
 (prod-scalar-matriz '((1 1) (2 2) (3 3)) '(2 3))
 (prod-scalar-matriz '((1 1) (2 2) (3 3) (4 4)) '(3 4))
+
+;Punto 18
+
+;aux
+;Proposito: Calcula la posicion (X,Y) del triangulo de pascal
+;X x y -> int
+;<x> ::= <int>
+;<y> ::= <int>
+
+(define aux_1
+  (lambda (x y) 
+  (if (or (= y 0) (= x y))1(+ (aux_1 (- x 1) y) (aux_1 (- x 1) (- y 1))))))
+
+;pascal_1
+;Proposito: Realiza un llamado recursivo a la funcion aux para calcular toda una fila N del triangulo
+;n x y -> <lista>
+;<n> ::= <int>
+;<y> ::= <int>
+
+(define pascal_1
+  (lambda (n y)
+    (if(= n y) (list(aux_1 n y)) (append (list (aux_1 n y)) (pascal_1 n (+ y 1))))
+      ))
+
+;pascal
+;Proposito: Llama a la función pascal1 pero usando unicamente un argumento
+;n -> <lista>
+;<n> ::= <int>
+(define pascal
+  (lambda (N)
+    (pascal_1 (- N 1) 0)
+    ))
+
+;pruebas
+;(pascal 5)
+;(pascal 1)
