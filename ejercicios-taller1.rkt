@@ -66,6 +66,31 @@
 ;(down '(Habia (una (vez)) alguien (( que )se mato)))
 
 
+; PUNTO 3 --------------------------------------------------
+; list-set :
+; Proposito:
+; x n p X and P -> L’:Es un procedimiento que dada la condicion P y la posicion n intercambia el elemento de esa posicion segun lo indicado
+; <lista> := ()
+; := <Valor> <lista>
+
+(define mayor5?
+  (lambda (x) (> x 5))); Se define la funcion mayor5? para que funcione en las pruebas 
+
+(define (list-set L n x P); se definen los parametros de la funcion 
+  (cond [(null? L) '()]; se crea el condicional dado que la lista sea vacia retorne una lista vacia 
+        [(= n 0)
+         (if (P (car L)); si el primer elemento de la lista coincide con el predicado se genera el resultado de este
+             (cons x (cdr L))
+             L)]
+        [else
+         (cons (car L) (list-set (cdr L) (- n 1) x P))])); la funcion continua llamandose hasta que n sea valido o en caso de acabar la lista 
+;Pruebas
+;(list-set '(5 8 7 6) 2 '(1 2) odd?)
+;(list-set '(5 8 7 6) 2 '(1 2) even?)
+;(list-set '(5 8 7 6) 3 '(1 5 10) mayor5? )
+;(list-set '(5 8 7 6) 0 '(1 5 10) mayor5? )
+
+
 ; PUNTO 4 --------------------------------------------------
 ; filter-in:
 ; Proposito:
